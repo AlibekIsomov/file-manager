@@ -1,0 +1,9 @@
+-Create table polices (id, sery, number, end date, uuid)
+-Create folder policies
+-make user interface
+-user interface should have search fields: sery, number, uuid
+-should search from table and return row with download
+-when download button pressed, if end date didn't past, the button should redirect to http://localhost/remote?uuid={uuid} url, else appropriate file should be looked up from policies folder
+-file name consists of uuid of policy with pdf extension
+-test it against the case where 2 million+ policies exists
+-if file is not found in the storage appropriate message should appear
