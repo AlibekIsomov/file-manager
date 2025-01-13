@@ -3,7 +3,8 @@ require_once __DIR__ . '/../repositories/PolicyRepository.php';
 
 class SearchController {
     private $policyRepository;
-
+    private array $results = [];
+    
     public function __construct($pdo) {
         $this->policyRepository = new PolicyRepository($pdo);
     }
@@ -12,12 +13,14 @@ class SearchController {
         $sery = isset($_GET['sery']) ? $_GET['sery'] : '';
         $number = isset($_GET['number']) ? $_GET['number'] : '';
         $uuid = isset($_GET['uuid']) ? $_GET['uuid'] : '';
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 10;
 
-        $this->results = $this->policyRepository->search($sery, $number, $uuid);
+        $this->results = $this->policyRepository->search($sery, $number, $uuid, $page, $perPage);
     }
 
     public function displayResults() {
-        if (!isset($this->results)) {
+        if (empty($this->results)) {
             return;
         }
 
@@ -35,5 +38,8 @@ class SearchController {
         }
         echo "</table>";
     }
-}
 
+    public function getResults(): array {
+        return $this->results;
+    }
+}
