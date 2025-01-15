@@ -32,6 +32,7 @@ if ($action === 'search') {
         .pagination .disabled { color: #ccc; pointer-events: none; }
         .per-page { margin: 20px 0; }
     </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="container">
