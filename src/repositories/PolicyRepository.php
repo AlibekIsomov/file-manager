@@ -9,7 +9,6 @@ class PolicyRepository {
     }
 
     public function search($sery, $number, $uuid, $page = 1, $perPage = 10) {
-        // Count total results first
         $countQuery = "SELECT COUNT(*) as total FROM policies WHERE 1=1";
         $params = array();
     
@@ -52,7 +51,7 @@ class PolicyRepository {
         $stmt->execute($params);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $policies = array();
+        $policies = array(); 
         foreach ($results as $row) {
             $policies[] = new Policy(
                 $row['id'],
@@ -63,11 +62,11 @@ class PolicyRepository {
             );
         }
         
-        return [
+        return array( 
             'total' => $totalCount,
             'page' => $page,
             'perPage' => $perPage,
             'policies' => $policies
-        ];
+        );
     }
 }

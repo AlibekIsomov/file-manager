@@ -3,14 +3,14 @@ require_once __DIR__ . '/../repositories/PolicyRepository.php';
 
 class SearchController {
     private $policyRepository;
-    private array $results = [];
-    
+    private $results = array(); 
+         
     public function __construct($pdo) {
         $this->policyRepository = new PolicyRepository($pdo);
     }
 
     public function handleRequest() {
-        $sery = isset($_GET['sery']) ? $_GET['sery'] : '';
+        $sery = isset($_GET['sery']) ? $_GET['sery'] : ''; 
         $number = isset($_GET['number']) ? $_GET['number'] : '';
         $uuid = isset($_GET['uuid']) ? $_GET['uuid'] : '';
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -26,7 +26,7 @@ class SearchController {
 
         echo "<table>";
         echo "<tr><th>ID</th><th>Sery</th><th>Number</th><th>End Date</th><th>UUID</th><th>Action</th></tr>";
-        foreach ($this->results as $policy) {
+        foreach ($this->results['policies'] as $policy) {  // Update this line to reference 'policies' inside the results array
             echo "<tr>";
             echo "<td>" . htmlspecialchars($policy->getId()) . "</td>";
             echo "<td>" . htmlspecialchars($policy->getSery()) . "</td>";
